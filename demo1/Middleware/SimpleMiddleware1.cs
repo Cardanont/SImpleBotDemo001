@@ -16,11 +16,11 @@ namespace demo1.Middleware
 
         public async Task OnTurnAsync(ITurnContext context, NextDelegate next, CancellationToken cancellationToken = default)
         {
-            await context.SendActivityAsync($"[SimpleMiddleware1] {context.Activity.Type}/OnTurn/Before");
+            await context.SendActivityAsync($"[SimpleMiddleware1] {context.Activity.Type}/OnTurnAsync/Before");
 
             await next(cancellationToken);
 
-            await context.SendActivityAsync($"[SimpleMiddleware] {context.Activity.Type}/OnTurn/After");
+            await context.SendActivityAsync($"[SimpleMiddleware1] {context.Activity.Type}/OnTurnAsync/After");
         }
     }
 }

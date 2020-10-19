@@ -13,9 +13,9 @@ namespace demo1.Middleware
     {
         public async Task OnTurnAsync(ITurnContext context, NextDelegate next, CancellationToken cancellationToken = default)
         {
-            await context.SendActivityAsync($"[SimpleMiddleware2] {context.Activity.Type}/OnTurn/Before");
+            await context.SendActivityAsync($"[SimpleMiddleware2] {context.Activity.Type}/OnTurnAsync/Before");
 
-            if(context.Activity.Type == ActivityTypes.Message && context.Activity.Text == "secret password")
+            if(context.Activity.Type == ActivityTypes.Message && context.Activity.Text == "secret password" || context.Activity.Type == ActivityTypes.Message && context.Activity.Text == "cardanont")
             {
                 // Calling next is totally optional. if the middleware does not call next then the
                 // next middleware in the pipeline will not be called, AND the vot will not receive the message.
