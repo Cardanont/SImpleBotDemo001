@@ -21,7 +21,7 @@ namespace demo1.Middleware
                 // next middleware in the pipeline will not be called, AND the vot will not receive the message.
                 //
                 // in this instance, we are only handling the message to downstream bots if the user says "secret password"
-                await next();
+                await next(cancellationToken);
             }
 
             await context.SendActivityAsync($"[SimpleMiddleware2] {context.Activity.Type}/OnTurnAsync/After");

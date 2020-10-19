@@ -18,7 +18,7 @@ namespace demo1.Middleware
         {
             await context.SendActivityAsync($"[SimpleMiddleware1] {context.Activity.Type}/OnTurn/Before");
 
-            await next();
+            await next(cancellationToken);
 
             await context.SendActivityAsync($"[SimpleMiddleware] {context.Activity.Type}/OnTurn/After");
         }

@@ -1,4 +1,5 @@
 using demo1.Bots;
+using demo1.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder.BotFramework;
@@ -38,6 +39,9 @@ namespace demo1
             services.AddBot<SimpleBot>(options =>
             {
                 options.CredentialProvider = new ConfigurationCredentialProvider(configuration);
+
+                options.Middleware.Add(new SimpleMiddleware1());
+                options.Middleware.Add(new SimpleMiddleware2());
             });
         }
 
