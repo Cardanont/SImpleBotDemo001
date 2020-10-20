@@ -14,10 +14,12 @@ namespace demo1.Bots
         {
             if(turnContext.Activity.Type is ActivityTypes.Message)
             {
-               
+                var storage = new MemoryStorage();
+                var state = new ConversationState(storage);
+
 
                 string input = turnContext.Activity.Text;
-                await turnContext.SendActivityAsync($"You said: {input}");
+                await turnContext.SendActivityAsync($"You said: {input}, and you have made {state} requests");
             }
         }
     }

@@ -28,6 +28,18 @@ namespace demo1
         public void ConfigureServices(IServiceCollection services)
         {
             //Set up the service config
+            // Create the stroage we'll be using for user and Conversation state.
+            // (Memory is great for testing purposes - examples of implementing storage with
+            var storage = new MemoryStorage();
+
+            // Create the USer state passing in the sotrage layer.
+            var userState = new UserState(storage);
+            services.AddSingleton(userState);
+
+
+
+            // Create the Conversation state passing in the storage layer
+            var conversationState = new ConversationState(storage);
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(ContentRootPath)
@@ -35,18 +47,19 @@ namespace demo1
                 .AddEnvironmentVariables();
             var configuration = builder.Build();
             services.AddSingleton(configuration);
+            services.AddSingleton(conversationState);
+
+            
+
+            
 
             // Add your SimpleBot to your app
             services.AddBot<SimpleBot>(options =>
             {
                 options.CredentialProvider = new ConfigurationCredentialProvider(configuration);
 
-
-                // Don't use prod
-                //options.Middleware.Add(new ConversationState<DemoState>(new MemoryStorage()));
-
-                options.Middleware.Add(new SimpleMiddleware1());
-                options.Middleware.Add(new SimpleMiddleware2());
+                //options.Middleware.Add(new SimpleMiddleware1());
+                //options.Middleware.Add(new SimpleMiddleware2());
             });
         }
 
