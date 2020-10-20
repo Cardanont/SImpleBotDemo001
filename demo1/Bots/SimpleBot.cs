@@ -14,8 +14,10 @@ namespace demo1.Bots
         {
             if(turnContext.Activity.Type is ActivityTypes.Message)
             {
+               
+
                 string input = turnContext.Activity.Text;
-                await turnContext.SendActivityAsync($"SimpleBot: {input}");
+                await turnContext.SendActivityAsync($"You said: {input}");
             }
         }
     }
